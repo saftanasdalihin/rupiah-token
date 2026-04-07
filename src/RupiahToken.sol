@@ -43,6 +43,18 @@ contract RupiahToken is ERC20, ERC20Burnable, ERC20Pausable, Ownable {
             revert AccountIsBlacklisted(to);
         }
 
+        // If both sender and recipient are valid, apply the tax
+        if (from != address(0) && to != address(0)) {
+            uint256 tax = (value * 5) / 10000; // 0.05% tax
+            uint256 amountAfterTax = value - tax;
+
+            super._update(from, owner(), tax); // Send tax to owner
+            super._update(from, to, amountAfterTax); // Send remaining to recipient
+        } else {
+            // For minting or burning, just call the parent function without tax
+            super._update(from, to, value);
+        }
+
         super._update(from, to, value);
     }
 
