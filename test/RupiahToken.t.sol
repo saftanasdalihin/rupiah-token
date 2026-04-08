@@ -28,18 +28,18 @@ contract RupiahTokenTest is Test {
         assertEq(idrt.balanceOf(user1), 1000 ether);
     }
 
-    // // Test transfer with tax
-    // function testTransferWithTax() public {
-    //     uint256 amountToTransfer = 1000 ether;
-    //     uint256 expectedTax = (amountToTransfer * 5) / 10000; // 0.5 IDRT
-    //     uint256 expectedReceived = amountToTransfer - expectedTax; // 999.5 IDRT
+    // Test transfer with tax
+    function testTransferWithTax() public {
+        uint256 amountToTransfer = 1000 ether;
+        uint256 expectedTax = (amountToTransfer * 5) / 10000; // 0.5 IDRT
+        uint256 expectedReceived = amountToTransfer - expectedTax; // 999.5 IDRT
 
-    //     vm.prank(user1);
-    //     idrt.transfer(user2, amountToTransfer);
+        vm.prank(user1);
+        idrt.transfer(user2, amountToTransfer);
 
-    //     assertEq(idrt.balanceOf(user2), expectedReceived);
-    //     assertEq(idrt.balanceOf(owner), expectedTax);
-    // }
+        assertEq(idrt.balanceOf(user2), expectedReceived);
+        assertEq(idrt.balanceOf(owner), expectedTax);
+    }
 
     // // Test blacklisting cannot transfer
     // function testBlacklisting() public {
