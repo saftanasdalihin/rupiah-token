@@ -45,3 +45,5 @@ forge test -vv
 ## 📜 License
 
 Distributed under the MIT License.
+
+Contract Address (Sepolia): [0x8E2...429D](https://sepolia.etherscan.io/address/0x8E2b680619ce59D3D065b9dad1D049271261429D)
