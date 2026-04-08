@@ -5,7 +5,6 @@ import "forge-std/Test.sol";
 import "forge-std/console.sol";
 import "../src/RupiahToken.sol";
 
-
 contract RupiahTokenTest is Test {
     RupiahToken public idrt;
     address public owner = address(1);
@@ -41,13 +40,14 @@ contract RupiahTokenTest is Test {
         assertEq(idrt.balanceOf(owner), expectedTax);
     }
 
-    // // Test blacklisting cannot transfer
-    // function testBlacklisting() public {
-    //     vm.prank(owner);
-    //     idrt.isBlacklisted(user1);
+    // Test blacklisting cannot transfer
+    function testBlacklisting() public {
+        vm.prank(owner);
+        idrt.blacklist(user1);
 
-    //     vm.prank(user1);
-    //     vm.expectRevert();
-    //     idrt.transfer(user2, 100 ether);
-    // }
+        vm.expectRevert();
+
+        vm.prank(user1);
+        idrt.transfer(user2, 100 ether);
+    }
 }
